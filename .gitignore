@@ -542,3 +542,4 @@ sysinfo.txt
 
 ### Plastic SCM ###
 .plastic/
+ignore.conf
