@@ -4,6 +4,8 @@ public class InputManager : MonoBehaviour
 {
     private PlayerInput _playerInput;
     private PlayerInput.OnFootActions _onFoot;
+    
+    
     private PlayerMotor _playerMotor;
     private PlayerLook _playerLook;
 
@@ -16,6 +18,9 @@ public class InputManager : MonoBehaviour
         _playerLook = GetComponent<PlayerLook>();
         
         _onFoot.Jump.performed += _ => _playerMotor.Jump();
+        _onFoot.Sprint.started += _ => _playerMotor.Sprint();
+        _onFoot.Sprint.canceled += _ => _playerMotor.Sprint();
+        _onFoot.Crouch.performed += _ => _playerMotor.Crouch();
     }
 
     public void FixedUpdate()
