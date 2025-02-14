@@ -9,4 +9,4 @@ Distributed under the [MIT License](https://choosealicense.com/licenses/mit/). S
 ## Author
 
 * [`@luismarques99`](https://github.com/luismarques99) - Luis Marques
-
+* [`@mpedro99`](https://github.com/mpedro99) - Pedro Martins
