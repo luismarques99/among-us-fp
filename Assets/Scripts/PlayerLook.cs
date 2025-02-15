@@ -2,10 +2,16 @@
 
 public class PlayerLook : MonoBehaviour
 {
-    public Camera camera;
+    public new Camera camera;
     public float sensitivity = 20f;
     private float _xRotation = 0f;
 
+    /**
+     * <summary>
+     * Processes the look of the player. It receives the inputs from our <c>InputManager.cs</c> and applies them to our character controller.
+     * </summary>
+     * <param name="input">Input from <c>InputManager.cs</c></param>
+     */
     public void ProcessLook(Vector2 input)
     {
         var mouseX = input.x;

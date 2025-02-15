@@ -32,15 +32,6 @@ public class PlayerMotor : MonoBehaviour
         {
             _crouchTimer += Time.deltaTime;
             _character.height = Mathf.Lerp(_character.height, _isCrouching ? 1 : 2, interpolation);
-            // if (_isCrouching)
-            // {
-            //     _character.height = Mathf.Lerp(_character.height, 1, interpolation);
-            // }
-            // else
-            // {
-            //     _character.height = Mathf.Lerp(_character.height, 2, interpolation);
-            // }
-
             if (interpolation > 1)
             {
                 _lerpCrouch = false;
