@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4713719514245437058}
   m_Layer: 0
-  m_Name: BulletLite_02
+  m_Name: BulletRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
