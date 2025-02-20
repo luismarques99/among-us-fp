@@ -7,7 +7,7 @@ namespace Interactables
         // Overriden implementation of Interact method.
         protected override void Interact()
         {
-            Debug.Log("Cube grabbed");
+            Debug.Log("Grabbed cube");
         }
     }
 }
