@@ -5,8 +5,9 @@ namespace Player
 {
     public class PlayerWeaponHolder : MonoBehaviour
     {
-        public Transform weaponHolder;
+        [SerializeField] private Transform weaponHolder;
         private InputManager _inputManager;
+        private Weapon _equippedWeapon;
 
         public void Start()
         {
@@ -15,26 +16,34 @@ namespace Player
 
         public void Update()
         {
-            if (_inputManager.onFoot.WeaponDrop.triggered)
+            if (_inputManager.OnFoot.WeaponDrop.triggered)
             {
                 Drop();
+            }
+
+            if (_inputManager.OnFoot.Attack.triggered && _equippedWeapon)
+            {
+                _equippedWeapon.Attack();
             }
         }
 
         public void Equip(Weapon weapon)
         {
-            if (weaponHolder.childCount > 0)
+            if (_equippedWeapon)
             {
                 Drop();
             }
 
             weapon.gameObject.transform.SetParent(weaponHolder);
+            _equippedWeapon = weapon;
         }
 
         private void Drop()
         {
-            if (weaponHolder.childCount == 0) return;
-            weaponHolder.GetComponentInChildren<Weapon>().rigidbody.isKinematic = false;
+            if (!_equippedWeapon) return;
+            _equippedWeapon.rigidbody.isKinematic = false;
+            _equippedWeapon.animator.enabled = false;
+            _equippedWeapon.transform.localScale = _equippedWeapon.normalScale;
             weaponHolder.DetachChildren();
         }
     }

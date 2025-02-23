@@ -4,14 +4,17 @@ namespace Player
 {
     public class PlayerMotor : MonoBehaviour
     {
-        public float gravity = -9.81f;
-        public float jumpHeight = 3f;
-        public float currentSpeed = 5f;
-        public float normalSpeed = 5f;
-        public float sprintSpeed = 10f;
+        [Header("Jump Settings")]
+        [SerializeField] public float gravity = -9.81f;
+        [SerializeField] public float jumpHeight = 3f;
+        
+        [Header("Speed Settings")]
+        [SerializeField] public float normalSpeed = 5f;
+        [SerializeField] public float sprintSpeed = 10f;
+        
+        private float _currentSpeed = 5f;
         private CharacterController _character;
         private Vector3 _playerVelocity;
-
         private bool _isGrounded;
         // Sprint and crouch disabled
         // private bool _isSprinting;
@@ -22,6 +25,7 @@ namespace Player
         public void Start()
         {
             _character = GetComponent<CharacterController>();
+            _currentSpeed = normalSpeed;
             // Sprint and crouch disabled
             // _isSprinting = false;
             // _lerpCrouch = false;
@@ -56,7 +60,7 @@ namespace Player
             var moveDirection = Vector3.zero;
             moveDirection.x = input.x;
             moveDirection.z = input.y;
-            _character.Move(transform.TransformDirection(moveDirection) * (currentSpeed * Time.deltaTime));
+            _character.Move(transform.TransformDirection(moveDirection) * (_currentSpeed * Time.deltaTime));
             _playerVelocity.y += gravity * Time.deltaTime;
             if (_isGrounded && _playerVelocity.y < 0)
             {

@@ -31,7 +31,7 @@ namespace Player
                 if (!interactable) interactable = hitInfo.collider.transform.root.GetComponent<Interactable>();
                 if (!interactable) return;
                 _playerHUD.UpdateText(interactable.promptMessage);
-                if (_inputManager.onFoot.Interact.triggered)
+                if (_inputManager.OnFoot.Interact.triggered)
                 {
                     interactable.BaseInteract();
                 }

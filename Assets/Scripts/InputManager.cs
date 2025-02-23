@@ -1,9 +1,10 @@
+using Interactables.Weapons;
 using Player;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public PlayerInput.OnFootActions onFoot;
+    public PlayerInput.OnFootActions OnFoot;
     
     private PlayerInput _playerInput;
     private PlayerMotor _playerMotor;
@@ -12,12 +13,12 @@ public class InputManager : MonoBehaviour
     public void Awake()
     {
         _playerInput = new PlayerInput();
-        onFoot = _playerInput.OnFoot;
+        OnFoot = _playerInput.OnFoot;
         
         _playerMotor = GetComponent<PlayerMotor>();
         _playerLook = GetComponent<PlayerLook>();
         
-        onFoot.Jump.performed += _ => _playerMotor.Jump();
+        OnFoot.Jump.performed += _ => _playerMotor.Jump();
         // Sprint and crouch disabled
         // _onFoot.Sprint.started += _ => _playerMotor.Sprint();
         // _onFoot.Sprint.canceled += _ => _playerMotor.Sprint();
@@ -27,21 +28,21 @@ public class InputManager : MonoBehaviour
     public void FixedUpdate()
     {
         // Tell the player motor to move using the value from our movement action.
-        _playerMotor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+        _playerMotor.ProcessMove(OnFoot.Movement.ReadValue<Vector2>());
     }
 
     public void LateUpdate()
     {
-        _playerLook.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+        _playerLook.ProcessLook(OnFoot.Look.ReadValue<Vector2>());
     }
 
     private void OnEnable()
     {
-        onFoot.Enable();
+        OnFoot.Enable();
     }
 
     private void OnDisable()
     {
-        onFoot.Disable();
+        OnFoot.Disable();
     }
 }

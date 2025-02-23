@@ -89,6 +89,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""aba1c933-d010-4909-a74d-f6a2c15a92c6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -210,6 +219,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""WeaponDrop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f58273f7-6b17-470b-b769-08e336597366"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -743,6 +763,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Crouch = m_OnFoot.FindAction("Crouch", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_WeaponDrop = m_OnFoot.FindAction("WeaponDrop", throwIfNotFound: true);
+        m_OnFoot_Attack = m_OnFoot.FindAction("Attack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -829,6 +850,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Crouch;
     private readonly InputAction m_OnFoot_Interact;
     private readonly InputAction m_OnFoot_WeaponDrop;
+    private readonly InputAction m_OnFoot_Attack;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -840,6 +862,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_OnFoot_Crouch;
         public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
         public InputAction @WeaponDrop => m_Wrapper.m_OnFoot_WeaponDrop;
+        public InputAction @Attack => m_Wrapper.m_OnFoot_Attack;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -870,6 +893,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @WeaponDrop.started += instance.OnWeaponDrop;
             @WeaponDrop.performed += instance.OnWeaponDrop;
             @WeaponDrop.canceled += instance.OnWeaponDrop;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -895,6 +921,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @WeaponDrop.started -= instance.OnWeaponDrop;
             @WeaponDrop.performed -= instance.OnWeaponDrop;
             @WeaponDrop.canceled -= instance.OnWeaponDrop;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -1039,6 +1068,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnWeaponDrop(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
